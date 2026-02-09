@@ -1,0 +1,33 @@
+<Project>
+
+  <PropertyGroup>
+    <CopyToLibs Condition="'$(MSBuildProjectName)' == 'FoodServerClient.Abstractions'
+                        Or '$(MSBuildProjectName)' == 'FoodServerClient.Http'
+                        Or '$(MSBuildProjectName)' == 'FoodServerClient.Grpc'">true</CopyToLibs>
+
+    <LibsDir>$(SolutionDir)libs\</LibsDir>
+  </PropertyGroup>
+
+  <Target Name="CopyOutputToLibs" AfterTargets="Build"
+          Condition="'$(Configuration)'=='Release' And '$(CopyToLibs)'=='true'">
+
+    <MakeDir Directories="$(LibsDir)" />
+
+    <!-- Основной DLL -->
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(LibsDir)" SkipUnchangedFiles="true" />
+
+    <!-- PDB/XML - если существуют -->
+    <Copy SourceFiles="$(TargetDir)$(TargetName).pdb"
+          DestinationFolder="$(LibsDir)"
+          SkipUnchangedFiles="true"
+          Condition="Exists('$(TargetDir)$(TargetName).pdb')" />
+
+    <Copy SourceFiles="$(TargetDir)$(TargetName).xml"
+          DestinationFolder="$(LibsDir)"
+          SkipUnchangedFiles="true"
+          Condition="Exists('$(TargetDir)$(TargetName).xml')" />
+
+    <Message Text="Copied $(TargetFileName) to $(LibsDir)" Importance="High" />
+  </Target>
+
+</Project>

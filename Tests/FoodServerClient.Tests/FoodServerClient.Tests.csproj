@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector" Version="6.0.0" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.76.0" />
+    <PackageReference Include="Grpc.AspNetCore.Web" Version="2.76.0" />
+    <PackageReference Include="Grpc.Net.Client.Web" Version="2.76.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageReference Include="xunit" Version="2.5.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="8.0.12" />
+    <Protobuf Include="..\..\FoodServerClient.Grpc\Protos\sms_test.proto" GrpcServices="Server" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\FoodServerClient.Abstractions\FoodServerClient.Abstractions.csproj" />
+    <ProjectReference Include="..\..\FoodServerClient.Grpc\FoodServerClient.Grpc.csproj" />
+    <ProjectReference Include="..\..\FoodServerClient.Http\FoodServerClient.Http.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+</Project>
